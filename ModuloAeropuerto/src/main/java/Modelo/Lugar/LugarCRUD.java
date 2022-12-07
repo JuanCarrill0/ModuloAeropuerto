@@ -4,11 +4,14 @@
  */
 package Modelo.Lugar;
 
+import static Modelo.Conexion.getConexionConConector;
 import static Modelo.Conexion.getConexionSinConector;
+import Modelo.LineaAerea.LineaAerea;
 import Modelo.ProgramaVuelo.ProgramaVuelo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +65,51 @@ public class LugarCRUD {
              e.printStackTrace();
         }
         return datos;
+        
+    }
+    
+    public boolean buscarLugarID(Lugar lugar) throws SQLException{
+        
+        PreparedStatement ps= null;
+        ResultSet rs= null;
+        Connection con = getConexionConConector();
+        
+        String sql= "SELECT idlugar FROM lugar WHERE nomlugar=?";
+        
+        
+        try{
+             ps= con.prepareStatement(sql);
+             ps.setString(1,lugar.getNomLugar());
+             rs= ps.executeQuery();
+             
+             if(rs.next()){
+                 lugar.setIdLugar(rs.getString("idlugar"));
+                 return true;
+             }
+             return false;
+            
+            }catch(SQLException e){
+               e.printStackTrace();
+               return false; 
+            } 
+    }
+    
+    public boolean actualizarDestino(Lugar lugar) throws ClassNotFoundException{
+        //Metodo para definir una consulta
+        PreparedStatement ps= null;
+        Connection con=getConexionSinConector();
+              
+        String sql= "UPDATE lugar SET iddestino = ? where nomlugar=?";                                                                                                                      ;
+        try{
+            ps=con.prepareStatement(sql);
+            ps.setString(1, lugar.getIdLugar());
+            ps.setString(2, lugar.getNomLugar());
+            ps.execute();
+            return true;
+        }catch(SQLException e){
+            e.printStackTrace();
+            return false;
+        }
         
     }
 

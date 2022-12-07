@@ -12,6 +12,15 @@ public class Lugar {
     private String idLugar;
     private String idTipoLugar;
     private String nomLugar;
+    private String idDestino;
+
+    public String getIdDestino() {
+        return idDestino;
+    }
+
+    public void setIdDestino(String idDestino) {
+        this.idDestino = idDestino;
+    }
 
     public void setIdLugar(String idLugar) {
         this.idLugar = idLugar;

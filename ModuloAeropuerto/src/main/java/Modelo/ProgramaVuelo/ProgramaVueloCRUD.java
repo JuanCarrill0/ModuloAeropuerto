@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class ProgramaVueloCRUD {
     
-        public boolean agregarVuelo(ProgramaVuelo programa) throws ClassNotFoundException{
+        public boolean agregarPrograma(ProgramaVuelo programa) throws ClassNotFoundException{
          //Metodo para definir una consulta
         PreparedStatement ps= null;
         Connection con=getConexionSinConector();
@@ -30,7 +30,7 @@ public class ProgramaVueloCRUD {
         String fechaCreacion = programa.getFechaCreacion();
 
         System.out.println(codLinea+idPrograma+idLugar+fechaCreacion);
-        String sql= "INSERT INTO programa_vuelo (codLinea,idPrograma,idLugar,fechaCreacion)"
+        String sql= "INSERT INTO programa_vuelo (codLinea,idPrograma,idLugar,fechaCrea)"
                 + "VALUES(?,?,?,?)";
         try{
             ps=con.prepareStatement(sql);

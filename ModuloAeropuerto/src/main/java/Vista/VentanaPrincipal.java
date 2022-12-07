@@ -4,6 +4,8 @@
  */
 package Vista;
 
+import Controlador.ControladorPrograma;
+
 
 /**
  *
@@ -120,10 +122,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        VentanaProgramaVuelo programa = new VentanaProgramaVuelo();
-        programa.setVisible(true);
         this.setVisible(false);
-        
+        ControladorPrograma programa = new ControladorPrograma();
+        programa.getVentanaPrograma().setVisible(true);
+        programa.getVentanaPrograma().setTitle("Crear Programa Vuelo");  
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

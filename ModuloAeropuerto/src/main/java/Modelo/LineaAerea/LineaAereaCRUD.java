@@ -4,6 +4,7 @@
  */
 package Modelo.LineaAerea;
 
+import static Modelo.Conexion.getConexionConConector;
 import static Modelo.Conexion.getConexionSinConector;
 import Modelo.ProgramaVuelo.ProgramaVuelo;
 import java.sql.Connection;
@@ -67,4 +68,32 @@ public class LineaAereaCRUD {
         return datos;
         
     }
+        
+    public boolean buscarLineaAereaID(LineaAerea linea) throws SQLException{
+        
+        PreparedStatement ps= null;
+        ResultSet rs= null;
+        Connection con = getConexionConConector();
+        
+        String sql= "SELECT codlinea FROM lineaaerea WHERE nomlinea=?";
+        
+        
+        try{
+             ps= con.prepareStatement(sql);
+             ps.setString(1,linea.getNomLinea());
+             rs= ps.executeQuery();
+             
+             if(rs.next()){
+                 linea.setCodLinea(rs.getString("codlinea"));
+                 return true;
+             }
+             return false;
+            
+            }catch(SQLException e){
+               e.printStackTrace();
+               return false; 
+            } 
+    }
+        
+        
 }

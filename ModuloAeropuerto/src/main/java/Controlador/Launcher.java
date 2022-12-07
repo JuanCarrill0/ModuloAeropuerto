@@ -8,6 +8,17 @@ package Controlador;
 import Vista.VentanaPrincipal;
 
 import Modelo.Conexion;
+import Modelo.Dia.Dia;
+import Modelo.Dia.DiaCRUD;
+import Modelo.Hora.Hora;
+import Modelo.Hora.HoraCRUD;
+import Modelo.LineaAerea.LineaAerea;
+import Modelo.LineaAerea.LineaAereaCRUD;
+import Modelo.Lugar.Lugar;
+import Modelo.Lugar.LugarCRUD;
+import Modelo.ProgramaVuelo.ProgramaVuelo;
+import Modelo.ProgramaVuelo.ProgramaVueloCRUD;
+import Vista.VentanaProgramaVuelo;
 
 /**
  *
@@ -17,6 +28,9 @@ public class Launcher {
 
     public static void main(String[] args) throws ClassNotFoundException {
         VentanaPrincipal ventana = new VentanaPrincipal();
+        VentanaProgramaVuelo ventanaPrograma = new VentanaProgramaVuelo();
+
         ventana.setVisible(true);
+        ventana.setTitle("MODULO AEROPUERTO");
     }
 }
