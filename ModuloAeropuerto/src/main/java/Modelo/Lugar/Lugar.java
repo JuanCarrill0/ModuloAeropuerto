@@ -13,6 +13,15 @@ public class Lugar {
     private String idTipoLugar;
     private String nomLugar;
     private String idDestino;
+    private String nomDestino;
+
+    public String getNomDestino() {
+        return nomDestino;
+    }
+
+    public void setNomDestino(String nomDestino) {
+        this.nomDestino = nomDestino;
+    }
 
     public String getIdDestino() {
         return idDestino;

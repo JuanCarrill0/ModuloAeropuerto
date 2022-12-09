@@ -24,7 +24,7 @@ public class VueloCRUD {
         Connection con=getConexionSinConector();
         
         String idVuelo = vuelo.getIdVuelo();
-        int idPrograma = vuelo.getIdPrograma();
+        String idPrograma = vuelo.getIdPrograma();
         String codLinea = vuelo .getCodLinea();
         String placaAvion = vuelo.getPlacaAvion();
         String Fecha = vuelo.getFecha();
@@ -36,7 +36,7 @@ public class VueloCRUD {
         try{
             ps=con.prepareStatement(sql);
             ps.setString(1, idVuelo);
-            ps.setInt(2, idPrograma);
+            ps.setString(2, idPrograma);
             ps.setString(3, codLinea);
             ps.setString(4, placaAvion);
             ps.setString(5, Fecha);
@@ -61,7 +61,7 @@ public class VueloCRUD {
                 /* 1. 1-Cedula-Nombre-Apellido-... */
                 Vuelo vuelo= new Vuelo();
                 vuelo.setIdVuelo(rs.getString(1));
-                vuelo.setIdPrograma(rs.getInt(2));
+                vuelo.setIdPrograma(rs.getString(2));
                 vuelo.setCodLinea(rs.getString(3));
                 vuelo.setPlacaAvion(rs.getString(4));
                 vuelo.setFecha(rs.getString(5));

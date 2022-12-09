@@ -3,6 +3,7 @@ Modelo\Avion\Avion.class
 Vista\VentanaPrincipal$4.class
 Controlador\Launcher.class
 Vista\VentanaVuelo$2.class
+Vista\VentanaProgramaVuelo$9.class
 Modelo\Lugar\Lugar.class
 Vista\VentanaProgramaVuelo$4.class
 Vista\VentanaProgramaVuelo.class
@@ -23,14 +24,18 @@ Vista\VentanaProgramaVuelo$3.class
 Modelo\ProgramaVuelo\ProgramaVuelo.class
 Controlador\ControladorPrograma.class
 Modelo\Avion\AvionCRUD.class
+Vista\VentanaVuelo$3.class
+Controlador\ControladorVuelo.class
 Modelo\Vuelo\Vuelo.class
 Vista\VentanaProgramaVuelo$5.class
+Vista\VentanaProgramaVuelo$8.class
 Vista\VentanaVuelo.class
 Modelo\LineaAerea\LineaAerea.class
 Vista\VentanaPrincipal$1.class
 Modelo\Hora\HoraCRUD.class
 Modelo\LineaAerea\LineaAereaCRUD.class
 Vista\VentanaProgramaVuelo$1.class
+Vista\MetodosVista.class
 Modelo\Dia\DiaCRUD.class
 Vista\VentanaProgramaVuelo$6.class
 Modelo\Lugar\LugarCRUD.class

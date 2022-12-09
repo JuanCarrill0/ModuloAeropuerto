@@ -4,10 +4,6 @@
  */
 package Controlador;
 
-import Modelo.Dia.Dia;
-import Modelo.Dia.DiaCRUD;
-import Modelo.Hora.Hora;
-import Modelo.Hora.HoraCRUD;
 import Modelo.LineaAerea.LineaAerea;
 import Modelo.LineaAerea.LineaAereaCRUD;
 import java.awt.event.ActionEvent;
@@ -28,16 +24,13 @@ import javax.swing.JOptionPane;
  * @author Juan
  */
 public class ControladorPrograma implements ActionListener{
-    private VentanaProgramaVuelo ventanaPrograma = new VentanaProgramaVuelo();
+    private final VentanaProgramaVuelo ventanaPrograma = new VentanaProgramaVuelo();
     /* Declaraciones tablas usadas en la ventana de programa de vuelo*/
     private Lugar lugar = new Lugar();
     private LugarCRUD lugarCRUD = new LugarCRUD();
     private LineaAerea linea = new LineaAerea();
     private LineaAereaCRUD lineaCRUD = new LineaAereaCRUD();
-    private Dia dia = new Dia();
-    private DiaCRUD diaCRUD = new DiaCRUD();
-    private Hora hora = new Hora();
-    private HoraCRUD horaCRUD = new HoraCRUD();
+    
     
     /* Declaración de la tabla a guardar de Programa de Vuelo*/
     
@@ -53,8 +46,6 @@ public class ControladorPrograma implements ActionListener{
     public VentanaProgramaVuelo getVentanaPrograma(){
         return ventanaPrograma;
     }
-
-    
     
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -84,10 +75,10 @@ public class ControladorPrograma implements ActionListener{
             
             try {
                 /*Actualizando el destino del lugar*/
-                lugar.setNomLugar((String)ventanaPrograma.cbAeropuertoD.getSelectedItem());
+                lugar.setNomLugar((String)ventanaPrograma.cbAeropuerto.getSelectedItem());
                 if(lugarCRUD.buscarLugarID(lugar)){
-                    lugar.setNomLugar((String)ventanaPrograma.cbAeropuerto.getSelectedItem());
-                    lugarCRUD.actualizarDestino(lugar);
+                    lugar.setNomLugar((String)ventanaPrograma.cbAeropuertoD.getSelectedItem());
+                    lugarCRUD.actualizarOrigen(lugar);
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(ControladorPrograma.class.getName()).log(Level.SEVERE, null, ex);

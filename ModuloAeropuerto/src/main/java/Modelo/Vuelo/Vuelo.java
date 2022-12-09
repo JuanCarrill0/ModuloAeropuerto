@@ -11,7 +11,7 @@ package Modelo.Vuelo;
 public class Vuelo {
     
     private String idVuelo;
-    private int idPrograma;
+    private String idPrograma;
     private String codLinea;
     private String placaAvion;
     private String Fecha;
@@ -21,7 +21,7 @@ public class Vuelo {
         this.idVuelo = idVuelo;
     }
 
-    public void setIdPrograma(int idPrograma) {
+    public void setIdPrograma(String idPrograma) {
         this.idPrograma = idPrograma;
     }
 
@@ -45,7 +45,7 @@ public class Vuelo {
         return idVuelo;
     }
 
-    public int getIdPrograma() {
+    public String getIdPrograma() {
         return idPrograma;
     }
 

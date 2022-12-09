@@ -46,6 +46,32 @@ public class LugarCRUD {
         
     }
     
+    public List listarLugarViajesID(String idlugar_){
+        List<Lugar> datos= new ArrayList<>();
+        String idlugar = idlugar_;
+        String sql= "SELECT C.nomlugar Despegue, D.nomlugar Destino\n" +
+                    "FROM lugar C, lugar D \n" +
+                    "WHERE D.idorigen = C.idlugar AND C.idlugar = '"+idlugar+"'";
+        try{
+            Connection con=getConexionSinConector();
+            PreparedStatement ps= con.prepareStatement(sql);
+            //Metodo para capturar resultado de una consulta a la BD
+            ResultSet rs= ps.executeQuery();
+            while(rs.next()){
+                Lugar lugar= new Lugar();
+                lugar.setNomLugar(rs.getString(1));
+                lugar.setNomDestino(rs.getString(2));
+
+                datos.add(lugar);
+            }
+               
+        }catch(Exception e){
+             e.printStackTrace();
+        }
+        return datos;
+        
+    }
+    
      public List listarLugarEspecifico(int idTipoLugar){
         List<Lugar> datos= new ArrayList<>();
         String sql= "select nomlugar from lugar where idtipolugar = '"+idTipoLugar+"'";
@@ -94,12 +120,12 @@ public class LugarCRUD {
             } 
     }
     
-    public boolean actualizarDestino(Lugar lugar) throws ClassNotFoundException{
+    public boolean actualizarOrigen(Lugar lugar) throws ClassNotFoundException{
         //Metodo para definir una consulta
         PreparedStatement ps= null;
         Connection con=getConexionSinConector();
               
-        String sql= "UPDATE lugar SET iddestino = ? where nomlugar=?";                                                                                                                      ;
+        String sql= "UPDATE lugar SET idorigen = ? where nomlugar=?";                                                                                                                      ;
         try{
             ps=con.prepareStatement(sql);
             ps.setString(1, lugar.getIdLugar());

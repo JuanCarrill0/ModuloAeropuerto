@@ -4,22 +4,6 @@
  */
 package Vista;
 
-import Controlador.ControladorPrograma;
-import Modelo.Conexion;
-import static Modelo.Conexion.getConexionSinConector;
-import Modelo.Dia.Dia;
-import Modelo.Dia.DiaCRUD;
-import Modelo.Hora.Hora;
-import Modelo.Hora.HoraCRUD;
-import Modelo.LineaAerea.LineaAerea;
-import Modelo.LineaAerea.LineaAereaCRUD;
-import Modelo.Lugar.Lugar;
-import Modelo.Lugar.LugarCRUD;
-import java.sql.Connection;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Iterator;
-import javax.swing.JComboBox;
 
 /**
  *
@@ -31,87 +15,21 @@ public final class VentanaProgramaVuelo extends javax.swing.JFrame {
      * Creates new form Ventana
      * @throws java.lang.ClassNotFoundException
      */
-    List Listar;
-
+    MetodosVista metodos = new MetodosVista();
     
     public VentanaProgramaVuelo(){
         initComponents();
         String tipoVuelo = (String) cbTipoVuelo.getSelectedItem();
-        llenarLugarCB(cbPaises,1);
-        llenarLugarCB(cbAeropuerto,6);
-        llenarLugarCB(cbAeropuertoD,6);
-        llenarLineaCB(cbLineaAerea);
-        llenarDiaCB(cbDia);
-        llenarHoraCB(cbHora);
+        metodos.llenarLugarCB(cbPaises,1);
+        metodos.llenarLugarCB(cbAeropuerto,6);
+        metodos.llenarLugarCB(cbAeropuertoD,6);
+        metodos.llenarLineaCB(cbLineaAerea);
+        metodos.llenarDiaCB(cbDia);
+        metodos.llenarHoraCB(cbHora);
     }
     
     /* Se pasa un comboBox y la ubicacion del tipo de lugar que se desea lista en el comboBox Especifico*/
-    public void llenarLugarCB(JComboBox CB, int Lugar){
-        try{
-            Connection con=getConexionSinConector();
-            LugarCRUD lugar = new LugarCRUD();
-            CB.removeAllItems();
-            Listar = lugar.listarLugarEspecifico(Lugar);
-            Iterator iterador = Listar.iterator(); 
-            while (iterador.hasNext()) {
-                Lugar lugarAeropuerto = (Lugar) iterador.next();
-                CB.addItem(lugarAeropuerto.getNomLugar());
-            }
- 
-        }catch(Exception e){
-            e.printStackTrace();
-        }  
-    }
-    
-     public void llenarLineaCB(JComboBox CB){
-        try{
-            Connection con=getConexionSinConector();
-            LineaAereaCRUD lineaAerea = new LineaAereaCRUD();
-            CB.removeAllItems();
-            Listar = lineaAerea.listarLinea();
-            Iterator iterador = Listar.iterator(); 
-            while (iterador.hasNext()) {
-                LineaAerea linea = (LineaAerea) iterador.next();
-                CB.addItem(linea.getNomLinea());
-            }
- 
-        }catch(Exception e){
-            e.printStackTrace();
-        }  
-    }
-     
-     public void llenarDiaCB(JComboBox CB){
-        try{
-            Connection con=getConexionSinConector();
-            DiaCRUD dia = new DiaCRUD();
-            CB.removeAllItems();
-            Listar = dia.listarDia();
-            Iterator iterador = Listar.iterator(); 
-            while (iterador.hasNext()) {
-                Dia dia_ = (Dia) iterador.next();
-                CB.addItem(dia_.getNomDia());
-            }
- 
-        }catch(Exception e){
-            e.printStackTrace();
-        }  
-    }
-     
-    public void llenarHoraCB(JComboBox CB){
-        try{
-            Connection con=getConexionSinConector();
-            HoraCRUD hora = new HoraCRUD();
-            CB.removeAllItems();
-            Listar = hora.listarHora();
-            Iterator iterador = Listar.iterator(); 
-            while (iterador.hasNext()) {
-                Hora hora_ = (Hora) iterador.next();
-                CB.addItem(hora_.getHora());
-            }
-        }catch(Exception e){
-            e.printStackTrace();
-        }  
-    }
+  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -162,9 +80,23 @@ public final class VentanaProgramaVuelo extends javax.swing.JFrame {
 
         jLabel3.setText("Crear Programa de Vuelo");
 
+        cbAeropuerto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione el Aeropuerto" }));
+        cbAeropuerto.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbAeropuertoItemStateChanged(evt);
+            }
+        });
+        cbAeropuerto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbAeropuertoActionPerformed(evt);
+            }
+        });
+
         jLabel4.setText("Aeropuerto Origen");
 
         jLabel5.setText("Aeropuerto Destino");
+
+        cbAeropuertoD.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione el Aeropuerto" }));
 
         jLabel6.setText("Línea Aérea");
 
@@ -369,11 +301,11 @@ public final class VentanaProgramaVuelo extends javax.swing.JFrame {
     private void cbTipoVueloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoVueloActionPerformed
         String tipoVuelo = (String) cbTipoVuelo.getSelectedItem();     
         if("Nacional".equals(tipoVuelo)){
-            llenarLugarCB(cbAeropuerto,6);
-            llenarLugarCB(cbAeropuertoD,6);
+            metodos.llenarLugarCB(cbAeropuerto,6);
+            metodos.llenarLugarCB(cbAeropuertoD,6);
         }else{
-            llenarLugarCB(cbAeropuerto,6);
-            llenarLugarCB(cbAeropuertoD,5);
+            metodos.llenarLugarCB(cbAeropuerto,6);
+            metodos.llenarLugarCB(cbAeropuertoD,5);
         }
     }//GEN-LAST:event_cbTipoVueloActionPerformed
 
@@ -384,6 +316,14 @@ public final class VentanaProgramaVuelo extends javax.swing.JFrame {
     private void JTextIdProgramaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTextIdProgramaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JTextIdProgramaActionPerformed
+
+    private void cbAeropuertoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAeropuertoActionPerformed
+
+    }//GEN-LAST:event_cbAeropuertoActionPerformed
+
+    private void cbAeropuertoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbAeropuertoItemStateChanged
+        cbAeropuerto.setEnabled(false);
+    }//GEN-LAST:event_cbAeropuertoItemStateChanged
 
     /**
      * @param args the command line arguments

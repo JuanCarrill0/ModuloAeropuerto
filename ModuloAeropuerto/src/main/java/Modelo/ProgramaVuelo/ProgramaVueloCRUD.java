@@ -5,6 +5,8 @@
 package Modelo.ProgramaVuelo;
 
 import static Modelo.Conexion.getConexionSinConector;
+import Modelo.Dia.Dia;
+import Modelo.LineaAerea.LineaAerea;
 import Modelo.Vuelo.Vuelo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -62,6 +64,37 @@ public class ProgramaVueloCRUD {
                 programa.setIdLugar(rs.getString(3));
                 programa.setFechaCreacion(rs.getString(4));
 
+                datos.add(programa);
+            }
+               
+        }catch(Exception e){
+             e.printStackTrace();
+        }
+        return datos;
+        
+    }
+    
+     public List listarProgramasAerolineaDia(LineaAerea linea, Dia dia){
+        List<ProgramaVuelo> datos= new ArrayList<>();
+        String fechacrea = dia.getNomDia();
+         System.out.println(fechacrea);
+        String codlinea = linea.getCodLinea();
+         System.out.println(codlinea);
+        String sql= "SELECT *" +
+                    " FROM programa_vuelo" +
+                    " WHERE fechacrea iLIKE '%"+fechacrea+"%' AND codlinea = '"+codlinea+"'";
+        try{
+            Connection con=getConexionSinConector();
+            PreparedStatement ps= con.prepareStatement(sql);
+            //Metodo para capturar resultado de una consulta a la BD
+            ResultSet rs= ps.executeQuery();
+            while(rs.next()){
+                /* 1. 1-Cedula-Nombre-Apellido-... */
+                ProgramaVuelo programa= new ProgramaVuelo();
+                programa.setCodLinea(rs.getString(1));
+                programa.setIdPrograma(rs.getInt(2));
+                programa.setIdLugar(rs.getString(3));
+                programa.setFechaCreacion(rs.getString(4));
                 datos.add(programa);
             }
                
