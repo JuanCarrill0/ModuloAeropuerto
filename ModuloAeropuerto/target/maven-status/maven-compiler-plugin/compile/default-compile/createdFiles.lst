@@ -7,6 +7,7 @@ Vista\VentanaProgramaVuelo$9.class
 Modelo\Lugar\Lugar.class
 Vista\VentanaProgramaVuelo$4.class
 Vista\VentanaProgramaVuelo.class
+Vista\VentanaVuelo$5.class
 Modelo\Propiedades.class
 Vista\VentanaProgramaVuelo$7.class
 Modelo\Conexion.class
@@ -32,6 +33,7 @@ Vista\VentanaProgramaVuelo$8.class
 Vista\VentanaVuelo.class
 Modelo\LineaAerea\LineaAerea.class
 Vista\VentanaPrincipal$1.class
+Vista\VentanaVuelo$4.class
 Modelo\Hora\HoraCRUD.class
 Modelo\LineaAerea\LineaAereaCRUD.class
 Vista\VentanaProgramaVuelo$1.class

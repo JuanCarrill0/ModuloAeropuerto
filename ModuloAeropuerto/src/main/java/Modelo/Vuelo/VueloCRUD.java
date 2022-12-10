@@ -24,23 +24,20 @@ public class VueloCRUD {
         Connection con=getConexionSinConector();
         
         String idVuelo = vuelo.getIdVuelo();
-        String idPrograma = vuelo.getIdPrograma();
+        int idPrograma = vuelo.getIdPrograma();
         String codLinea = vuelo .getCodLinea();
         String placaAvion = vuelo.getPlacaAvion();
-        String Fecha = vuelo.getFecha();
         int plazasVacias = vuelo .getPlazasVacias();
-
-        System.out.println(idVuelo+idPrograma+codLinea+placaAvion+Fecha+plazasVacias);
+        
         String sql= "INSERT INTO vuelo (idVuelo,idPrograma,codLinea,placaAvion,Fecha,plazasVacias)"
-                + "VALUES(?,?,?,?,?,?)";
+                + "VALUES(?,?,?,?,CURRENT_DATE,?)";
         try{
             ps=con.prepareStatement(sql);
             ps.setString(1, idVuelo);
-            ps.setString(2, idPrograma);
+            ps.setInt(2, idPrograma);
             ps.setString(3, codLinea);
             ps.setString(4, placaAvion);
-            ps.setString(5, Fecha);
-            ps.setInt(6, plazasVacias);
+            ps.setInt(5, plazasVacias);
             ps.execute();
             return true;
         }catch(SQLException e){
@@ -61,7 +58,7 @@ public class VueloCRUD {
                 /* 1. 1-Cedula-Nombre-Apellido-... */
                 Vuelo vuelo= new Vuelo();
                 vuelo.setIdVuelo(rs.getString(1));
-                vuelo.setIdPrograma(rs.getString(2));
+                vuelo.setIdPrograma(rs.getInt(2));
                 vuelo.setCodLinea(rs.getString(3));
                 vuelo.setPlacaAvion(rs.getString(4));
                 vuelo.setFecha(rs.getString(5));

@@ -6,7 +6,6 @@ package Modelo.LineaAerea;
 
 import static Modelo.Conexion.getConexionConConector;
 import static Modelo.Conexion.getConexionSinConector;
-import Modelo.ProgramaVuelo.ProgramaVuelo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -76,7 +75,6 @@ public class LineaAereaCRUD {
         Connection con = getConexionConConector();
         
         String sql= "SELECT codlinea FROM lineaaerea WHERE nomlinea=?";
-        
         
         try{
              ps= con.prepareStatement(sql);

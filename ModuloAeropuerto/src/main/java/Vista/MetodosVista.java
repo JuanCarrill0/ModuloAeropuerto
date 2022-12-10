@@ -94,16 +94,26 @@ public class MetodosVista {
         }  
     }
     
-     public void llenarAvionCB(JComboBox CB){
+     public void llenarAvionCB(JComboBox CB, JComboBox CBLinea){
         try{
-            Connection con=getConexionSinConector();
-            ModeloAvionCRUD modelo = new ModeloAvionCRUD();
-            CB.removeAllItems();
-            Listar = modelo.listarModeloAvion();
-            Iterator iterador = Listar.iterator(); 
-            while (iterador.hasNext()) {
-                ModeloAvion modelo_ = (ModeloAvion) iterador.next();
-                CB.addItem(modelo_.getNombreModelo()+" "+modelo_.getIdModelo());
+            /*Declarar el modelo de linea aerea con su CRUD*/
+            LineaAerea linea = new LineaAerea();
+            LineaAereaCRUD lineaCRUD = new LineaAereaCRUD();
+            /*Saber el nombre de la linea aerea para buscar su id*/
+            linea.setNomLinea((String) CBLinea.getSelectedItem());
+            if(lineaCRUD.buscarLineaAereaID(linea)){
+                /*Si la encuentra llenar el combo box*/
+                Connection con=getConexionSinConector();
+                ModeloAvionCRUD modelo = new ModeloAvionCRUD();
+                CB.removeAllItems();
+                /*Llama al metodo listar ModeloLinea Aerea que ejecuta el sql*/
+                Listar = modelo.listarModeloAerolinea(linea.getCodLinea());
+                Iterator iterador = Listar.iterator(); 
+                while (iterador.hasNext()) {
+                    ModeloAvion modelo_ = (ModeloAvion) iterador.next();
+                    CB.addItem(modelo_.getNombreModelo());
+                }
+                
             }
         }catch(Exception e){
             e.printStackTrace();

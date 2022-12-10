@@ -21,7 +21,7 @@ public class VentanaVuelo extends javax.swing.JFrame {
         initComponents();
         metodos.llenarLineaCB(cbAerolinea);
         metodos.llenarDiaCB(cbDia);
-        metodos.llenarAvionCB(cbAvion);
+        metodos.llenarAvionCB(cbAvion,cbAerolinea);
     }
     
 
@@ -61,6 +61,12 @@ public class VentanaVuelo extends javax.swing.JFrame {
         jLabel1.setText("Modulo Aeropuerto");
 
         jLabel3.setText("Crear  Vuelo");
+
+        cbAerolinea.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbAerolineaItemStateChanged(evt);
+            }
+        });
 
         jLabel2.setText("Aerolinea");
 
@@ -227,6 +233,10 @@ public class VentanaVuelo extends javax.swing.JFrame {
     private void btnProgramasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProgramasActionPerformed
 
     }//GEN-LAST:event_btnProgramasActionPerformed
+
+    private void cbAerolineaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbAerolineaItemStateChanged
+        metodos.llenarAvionCB(cbAvion,cbAerolinea);
+    }//GEN-LAST:event_cbAerolineaItemStateChanged
 
     /**
      * @param args the command line arguments

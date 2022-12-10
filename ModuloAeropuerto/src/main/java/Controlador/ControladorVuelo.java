@@ -4,12 +4,16 @@
  */
 package Controlador;
 
+import Modelo.Avion.Avion;
+import Modelo.Avion.AvionCRUD;
 import Modelo.Dia.Dia;
 import Modelo.Dia.DiaCRUD;
 import Modelo.LineaAerea.LineaAerea;
 import Modelo.LineaAerea.LineaAereaCRUD;
 import Modelo.Lugar.Lugar;
 import Modelo.Lugar.LugarCRUD;
+import Modelo.ModeloAvion.ModeloAvion;
+import Modelo.ModeloAvion.ModeloAvionCRUD;
 import Modelo.ProgramaVuelo.ProgramaVuelo;
 import Modelo.ProgramaVuelo.ProgramaVueloCRUD;
 import Modelo.Vuelo.Vuelo;
@@ -23,6 +27,7 @@ import javax.swing.table.DefaultTableModel;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.*;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -33,6 +38,10 @@ public class ControladorVuelo implements ActionListener {
     
     private final VentanaVuelo ventanaVuelo = new VentanaVuelo();
     private ProgramaVuelo programa = new ProgramaVuelo();
+    private AvionCRUD avionCRUD = new AvionCRUD();
+    private ModeloAvion modeloAvion = new ModeloAvion();
+    private ModeloAvionCRUD modeloAvionCRUD = new ModeloAvionCRUD();
+    private Avion avion = new Avion();
     private Vuelo vuelo = new Vuelo();
     private VueloCRUD vueloCRUD = new VueloCRUD();
     private ProgramaVueloCRUD programaCRUD = new ProgramaVueloCRUD();
@@ -84,24 +93,48 @@ public class ControladorVuelo implements ActionListener {
             }
   }
     
+    public static String getLastN(String s, int n) {
+        if (s == null || n > s.length()) {
+            return s;
+        }
+        return s.substring(s.length() - n);
+    }
+ 
     @Override
     public void actionPerformed(ActionEvent e) {
+        /*Si se da al boton de ver programas de vuelo*/
         if(e.getSource() == ventanaVuelo.btnProgramas){
             /*Se declaran los parametros establecidos en el cb*/
             linea.setNomLinea((String)ventanaVuelo.cbAerolinea.getSelectedItem());
             dia.setNomDia((String)ventanaVuelo.cbDia.getSelectedItem());
+            /*Ejecuta el metodo para listar la tabla*/
             listarTabla(ventanaVuelo.Tabla);
         }else{
             if(e.getSource() == ventanaVuelo.btnCrearVuelo){
                 try {
+                    linea.setNomLinea((String)ventanaVuelo.cbAerolinea.getSelectedItem());
+                    avion.setIdModelo(getLastN((String)ventanaVuelo.cbAvion.getSelectedItem(),3));
+                    modeloAvion.setIdModelo(getLastN((String)ventanaVuelo.cbAvion.getSelectedItem(),3));
                     if(lineaCRUD.buscarLineaAereaID(linea)){
-                        vuelo.setCodLinea(linea.getCodLinea());
-                        vuelo.setFecha((String)ventanaVuelo.cbDia.getSelectedItem());
-                        vuelo.setIdPrograma((String)ventanaVuelo.TextIdPrograma.getText());
-                        vuelo.setIdVuelo((String)ventanaVuelo.TextNumVuelo.getText());
-                  
+                        avion.setCodLinea(linea.getCodLinea());
+                        if(avionCRUD.buscarAvionID(avion)){
+                            if(modeloAvionCRUD.buscarPlazasVacias(modeloAvion)){
+                                vuelo.setIdVuelo((String)ventanaVuelo.TextNumVuelo.getText());
+                                vuelo.setIdPrograma(Integer.parseInt((String)ventanaVuelo.TextIdPrograma.getText()));
+                                vuelo.setCodLinea(linea.getCodLinea());
+                                vuelo.setPlacaAvion(avion.getPlacaAvion());
+                                vuelo.setPlazasVacias(modeloAvion.getCapacidad());
+                                if(vueloCRUD.agregarVuelo(vuelo)){
+                                    JOptionPane.showMessageDialog(null,"Se guardó el vuelo");
+                                }else{
+                                    JOptionPane.showMessageDialog(null,"Error en guardar el vuelo, revise los datos");
+                                }
+                            }
+                        }
                     }
                 } catch (SQLException ex) {
+                    Logger.getLogger(ControladorVuelo.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
                     Logger.getLogger(ControladorVuelo.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
