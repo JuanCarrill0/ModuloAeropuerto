@@ -4,10 +4,8 @@
  */
 package Modelo.ModeloAvion;
 
-import Modelo.Avion.Avion;
 import static Modelo.Conexion.getConexionConConector;
 import static Modelo.Conexion.getConexionSinConector;
-import Modelo.LineaAerea.LineaAerea;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,32 +18,6 @@ import java.util.List;
  * @author Juan
  */
 public class ModeloAvionCRUD {
-    
-    
-        public List listarModeloAvion(){
-        List<ModeloAvion> datos= new ArrayList<>();
-        String sql= "select * from modelo_avion";
-        try{
-            Connection con=getConexionSinConector();
-            PreparedStatement ps= con.prepareStatement(sql);
-            //Metodo para capturar resultado de una consulta a la BD
-            ResultSet rs= ps.executeQuery();
-            while(rs.next()){
-                /* 1. 1-Cedula-Nombre-Apellido-... */
-                ModeloAvion modelo= new ModeloAvion();
-                modelo.setIdModelo(rs.getString(1));
-                modelo.setCapacidad(rs.getInt(2));
-                modelo.setNombreModelo(rs.getString(3));
-
-                datos.add(modelo);
-            }
-               
-        }catch(Exception e){
-             e.printStackTrace();
-        }
-        return datos;
-        
-    }
     
         
     public List listarModeloAerolinea(String codLinea){
@@ -81,7 +53,6 @@ public class ModeloAvionCRUD {
         String sql= "SELECT capacidad\n" +
                     "FROM modelo_avion\n" +
                     "WHERE idmodelo = ?";
-        
         try{
              ps= con.prepareStatement(sql);
              ps.setString(1,modelo.getIdModelo());

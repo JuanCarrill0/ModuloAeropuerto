@@ -2,6 +2,7 @@ C:\Users\tanne\OneDrive\Escritorio\GitFunda\ModuloAeropuerto\ModuloAeropuerto\sr
 C:\Users\tanne\OneDrive\Escritorio\GitFunda\ModuloAeropuerto\ModuloAeropuerto\src\main\java\Modelo\Dia\Dia.java
 C:\Users\tanne\OneDrive\Escritorio\GitFunda\ModuloAeropuerto\ModuloAeropuerto\src\main\java\Vista\VentanaPrincipal.java
 C:\Users\tanne\OneDrive\Escritorio\GitFunda\ModuloAeropuerto\ModuloAeropuerto\src\main\java\Controlador\Launcher.java
+C:\Users\tanne\OneDrive\Escritorio\GitFunda\ModuloAeropuerto\ModuloAeropuerto\src\main\java\Vista\VentanaPrograma.java
 C:\Users\tanne\OneDrive\Escritorio\GitFunda\ModuloAeropuerto\ModuloAeropuerto\src\main\java\Modelo\ModeloAvion\ModeloAvionCRUD.java
 C:\Users\tanne\OneDrive\Escritorio\GitFunda\ModuloAeropuerto\ModuloAeropuerto\src\main\java\Modelo\Avion\AvionCRUD.java
 C:\Users\tanne\OneDrive\Escritorio\GitFunda\ModuloAeropuerto\ModuloAeropuerto\src\main\java\Modelo\Propiedades.java
@@ -12,6 +13,7 @@ C:\Users\tanne\OneDrive\Escritorio\GitFunda\ModuloAeropuerto\ModuloAeropuerto\sr
 C:\Users\tanne\OneDrive\Escritorio\GitFunda\ModuloAeropuerto\ModuloAeropuerto\src\main\java\Modelo\Lugar\LugarCRUD.java
 C:\Users\tanne\OneDrive\Escritorio\GitFunda\ModuloAeropuerto\ModuloAeropuerto\src\main\java\Modelo\Hora\Hora.java
 C:\Users\tanne\OneDrive\Escritorio\GitFunda\ModuloAeropuerto\ModuloAeropuerto\src\main\java\Modelo\TipoLugar\TipoLugar.java
+C:\Users\tanne\OneDrive\Escritorio\GitFunda\ModuloAeropuerto\ModuloAeropuerto\src\main\java\Controlador\ControladorProgramaVuelo.java
 C:\Users\tanne\OneDrive\Escritorio\GitFunda\ModuloAeropuerto\ModuloAeropuerto\src\main\java\Modelo\Hora\HoraCRUD.java
 C:\Users\tanne\OneDrive\Escritorio\GitFunda\ModuloAeropuerto\ModuloAeropuerto\src\main\java\Modelo\ProgramaVuelo\ProgramaVuelo.java
 C:\Users\tanne\OneDrive\Escritorio\GitFunda\ModuloAeropuerto\ModuloAeropuerto\src\main\java\Vista\MetodosVista.java

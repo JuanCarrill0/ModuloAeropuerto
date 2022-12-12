@@ -20,31 +20,6 @@ import java.util.List;
  * @author Juan
  */
 public class AvionCRUD {
-    
-        public List listarAvion(){
-        List<Avion> datos= new ArrayList<>();
-        String sql= "select * from avion";
-        try{
-            Connection con=getConexionSinConector();
-            PreparedStatement ps= con.prepareStatement(sql);
-            //Metodo para capturar resultado de una consulta a la BD
-            ResultSet rs= ps.executeQuery();
-            while(rs.next()){
-                /* 1. 1-Cedula-Nombre-Apellido-... */
-                Avion avion= new Avion();
-                avion.setCodLinea(rs.getString(1));
-                avion.setPlacaAvion(rs.getString(2));
-                avion.setIdModelo(rs.getString(3));
-
-                datos.add(avion);
-            }
-               
-        }catch(Exception e){
-             e.printStackTrace();
-        }
-        return datos;
-        
-    }
         
     public boolean buscarAvionID(Avion avion) throws SQLException{
         PreparedStatement ps= null;

@@ -5,6 +5,7 @@
 package Vista;
 
 import Controlador.ControladorPrograma;
+import Controlador.ControladorProgramaVuelo;
 import Controlador.ControladorVuelo;
 
 
@@ -18,7 +19,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      * Creates new form VentanaPrincipal
      */
     private final ControladorPrograma programa = new ControladorPrograma();
-    private final ControladorVuelo programaVuelo = new ControladorVuelo();
+    private final ControladorVuelo Vuelo = new ControladorVuelo();
+    private final ControladorProgramaVuelo programaVuelo = new ControladorProgramaVuelo();
     
     public VentanaPrincipal() {
         
@@ -41,7 +43,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
 
         jLabel3.setText("Crear Programa de Vuelo");
 
@@ -75,8 +76,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Inscribirse a un Vuelo");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -93,15 +92,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addGap(166, 166, 166)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton3)
-                                .addGap(97, 97, 97)
-                                .addComponent(jButton4))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton1)
-                                .addGap(111, 111, 111)
+                                .addGap(89, 89, 89)
                                 .addComponent(jButton2))
-                            .addComponent(jLabel4))))
-                .addContainerGap(197, Short.MAX_VALUE))
+                            .addComponent(jLabel4)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(282, 282, 282)
+                        .addComponent(jButton3)))
+                .addContainerGap(206, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,11 +114,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addComponent(jButton2))
                 .addGap(33, 33, 33)
                 .addComponent(jLabel5)
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
-                    .addComponent(jButton3))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(jButton3)
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         pack();
@@ -133,13 +129,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false);
+        programaVuelo.getVentanaProgramaVuelo().setVisible(true);
+        programaVuelo.getVentanaProgramaVuelo().setTitle("Ver programas y vuelos");
+   
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.setVisible(false);
-        programaVuelo.getVentanaVuelo().setVisible(true);
-        programaVuelo.getVentanaVuelo().setTitle("Crear Vuelo");
+        Vuelo.getVentanaVuelo().setVisible(true);
+        Vuelo.getVentanaVuelo().setTitle("Crear Vuelo");
      
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -182,7 +181,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

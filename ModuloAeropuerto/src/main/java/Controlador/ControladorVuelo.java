@@ -37,20 +37,17 @@ import javax.swing.JOptionPane;
 public class ControladorVuelo implements ActionListener {
     
     private final VentanaVuelo ventanaVuelo = new VentanaVuelo();
-    private ProgramaVuelo programa = new ProgramaVuelo();
-    private AvionCRUD avionCRUD = new AvionCRUD();
-    private ModeloAvion modeloAvion = new ModeloAvion();
-    private ModeloAvionCRUD modeloAvionCRUD = new ModeloAvionCRUD();
-    private Avion avion = new Avion();
-    private Vuelo vuelo = new Vuelo();
-    private VueloCRUD vueloCRUD = new VueloCRUD();
-    private ProgramaVueloCRUD programaCRUD = new ProgramaVueloCRUD();
-    private Lugar lugar = new Lugar();
-    private LugarCRUD lugarCRUD = new LugarCRUD();
-    private LineaAerea linea = new LineaAerea();
-    private LineaAereaCRUD lineaCRUD = new LineaAereaCRUD();
-    private Dia dia = new Dia();
-    private DiaCRUD diaCRUD = new DiaCRUD();
+    private final AvionCRUD avionCRUD = new AvionCRUD();
+    private final ModeloAvion modeloAvion = new ModeloAvion();
+    private final ModeloAvionCRUD modeloAvionCRUD = new ModeloAvionCRUD();
+    private final Avion avion = new Avion();
+    private final Vuelo vuelo = new Vuelo();
+    private final VueloCRUD vueloCRUD = new VueloCRUD();
+    private final ProgramaVueloCRUD programaCRUD = new ProgramaVueloCRUD();
+    private final LugarCRUD lugarCRUD = new LugarCRUD();
+    private final LineaAerea linea = new LineaAerea();
+    private final LineaAereaCRUD lineaCRUD = new LineaAereaCRUD();
+    private final Dia dia = new Dia();
     DefaultTableModel modelo= new DefaultTableModel(); 
     
     public ControladorVuelo(){
@@ -64,7 +61,16 @@ public class ControladorVuelo implements ActionListener {
         return ventanaVuelo;
     }
     
+    public void limpiar(JTable tabla){
+            DefaultTableModel tb= (DefaultTableModel)tabla.getModel();
+            int a= tabla.getRowCount()-1;
+            for(int i=a; i>=0; i--){
+                tb.removeRow(tb.getRowCount()-1);
+              }
+ }
+    
     public void listarTabla(JTable tabla){
+        limpiar(tabla);
         modelo = (DefaultTableModel)tabla.getModel();
         Object[] objeto= new Object[5];
         /*Se busca el id de la linea y se pasa como parametro junto al dia para listas
@@ -76,7 +82,7 @@ public class ControladorVuelo implements ActionListener {
                      if (modelo.getRowCount()== 0) {
                             for(int i=0; i<listarPrograma.size();i++){
                             /*Enlista los lugares relacionados con el id del lugar de la lista de programas*/
-                            List<Lugar> listarLugar = lugarCRUD.listarLugarViajesID(listarPrograma.get(i).getIdLugar());
+                            List<Lugar> listarLugar = lugarCRUD.listarViajesPrograma(listarPrograma.get(i).getIdPrograma());
                             /*Se adjuntan los datos en la tabla respectivamente*/
                             objeto[0]= listarPrograma.get(i).getIdPrograma();
                             objeto[1]= listarPrograma.get(i).getFechaCreacion();
@@ -85,8 +91,7 @@ public class ControladorVuelo implements ActionListener {
                             modelo.addRow(objeto);
                         }
                         ventanaVuelo.Tabla.setModel(modelo);    
-                    }
-                     
+                    }    
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(ControladorPrograma.class.getName()).log(Level.SEVERE, null, ex);

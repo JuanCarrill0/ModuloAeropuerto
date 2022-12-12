@@ -13,36 +13,42 @@ import java.sql.SQLException;
  * @author Juan
  */
 public class Conexion {
+    
+    private static Connection conConector;
+    private static Connection conNoConector;
+    
+
     public static Connection getConexionConConector(){
-        //Conectar
-        Connection con=null;
-        try{ 
-        con= DriverManager.getConnection(Propiedades.URL,Propiedades.USERNAME,Propiedades.PASSWORD); 
-        if(con!=null){
-            System.out.println("*** Connected to database***");
-        }
-       }
-       catch(SQLException ex){
-           ex.printStackTrace();
-       }
-       return con;
+        
+        if(conConector!= null){
+            return Conexion.conConector;
+        }else{
+            try{ 
+            conConector= DriverManager.getConnection(Propiedades.URL,Propiedades.USERNAME,Propiedades.PASSWORD); 
+           }
+           catch(SQLException ex){
+               ex.printStackTrace();
+           }
+           return conConector;   
+        }   
     }
     
     public static Connection getConexionSinConector() throws ClassNotFoundException{
         //Conectar
         String controlador = "org.postgresql.Driver";
-        Connection con=null;
-        try{ 
-        Class.forName(controlador);    
-        con= DriverManager.getConnection(Propiedades.URL,Propiedades.USERNAME,Propiedades.PASSWORD); 
-        if(con!=null){
-            System.out.println("*** Connected to database***");
+        if(conNoConector != null){
+            return Conexion.conNoConector;
+        }else{
+            try{ 
+            Class.forName(controlador);    
+            Conexion.conNoConector= DriverManager.getConnection(Propiedades.URL,Propiedades.USERNAME,Propiedades.PASSWORD); 
+           }
+           catch(SQLException ex){
+               ex.printStackTrace();
+           }
+           return Conexion.conNoConector;
+            
         }
-       }
-       catch(SQLException ex){
-           ex.printStackTrace();
-       }
-       return con;
     }
     
 }

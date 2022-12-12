@@ -46,12 +46,12 @@ public class LugarCRUD {
         
     }
     
-    public List listarLugarViajesID(String idlugar_){
+    public List listarViajesPrograma(int idPrograma_){
         List<Lugar> datos= new ArrayList<>();
-        String idlugar = idlugar_;
-        String sql= "SELECT C.nomlugar Despegue, D.nomlugar Destino\n" +
-                    "FROM lugar C, lugar D \n" +
-                    "WHERE D.idorigen = C.idlugar AND C.idlugar = '"+idlugar+"'";
+        int idPrograma = idPrograma_;
+        String sql= "SELECT C.nomlugar Despegue, D.nomlugar Destino " +
+                    "FROM lugar C, lugar D , programa_vuelo P " +
+                    "WHERE C.idlugar = P.idlugar AND D.idlugar = P.iddestino AND P.idprograma = '"+idPrograma+"';";
         try{
             Connection con=getConexionSinConector();
             PreparedStatement ps= con.prepareStatement(sql);
@@ -61,7 +61,6 @@ public class LugarCRUD {
                 Lugar lugar= new Lugar();
                 lugar.setNomLugar(rs.getString(1));
                 lugar.setNomDestino(rs.getString(2));
-
                 datos.add(lugar);
             }
                
@@ -100,7 +99,7 @@ public class LugarCRUD {
         ResultSet rs= null;
         Connection con = getConexionConConector();
         
-        String sql= "SELECT idlugar FROM lugar WHERE nomlugar=?";
+        String sql= "SELECT idlugar FROM lugar WHERE nomlugar= ?";
         
         
         try{
@@ -110,6 +109,7 @@ public class LugarCRUD {
              
              if(rs.next()){
                  lugar.setIdLugar(rs.getString("idlugar"));
+                 System.out.println(rs.getString("idlugar"));
                  return true;
              }
              return false;
@@ -118,27 +118,5 @@ public class LugarCRUD {
                e.printStackTrace();
                return false; 
             } 
-    }
-    
-    public boolean actualizarOrigen(Lugar lugar) throws ClassNotFoundException{
-        //Metodo para definir una consulta
-        PreparedStatement ps= null;
-        Connection con=getConexionSinConector();
-              
-        String sql= "UPDATE lugar SET idorigen = ? where nomlugar=?";                                                                                                                      ;
-        try{
-            ps=con.prepareStatement(sql);
-            ps.setString(1, lugar.getIdLugar());
-            ps.setString(2, lugar.getNomLugar());
-            ps.execute();
-            return true;
-        }catch(SQLException e){
-            e.printStackTrace();
-            return false;
-        }
-        
-    }
-
-   
-    
+    }   
 }

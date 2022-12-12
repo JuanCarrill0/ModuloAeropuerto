@@ -13,6 +13,15 @@ public class ProgramaVuelo {
     private int idPrograma;
     private String idLugar;
     private String fechaCreacion;
+    private String idDestino;
+
+    public String getIdDestino() {
+        return idDestino;
+    }
+
+    public void setIdDestino(String idDestino) {
+        this.idDestino = idDestino;
+    }
 
     public void setCodLinea(String codLinea) {
         this.codLinea = codLinea;
